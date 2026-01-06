@@ -7,7 +7,7 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        image: ["GLideN64 (x86 Project64-Qt)"]
+        image: ["GLideN64 (x86 PJ64Legacy-Qt)"]
     env:
       QTDIR_x86: C:\Static_Qt_x86
       QT_BUILD_BASE_URL: https://github.com/gonetz/GLideN64/releases/download/qt_build/
@@ -34,31 +34,31 @@ jobs:
           echo "GIT_REVISION=$env:revision" >> $env:GITHUB_ENV
         shell: pwsh
       - name: Prepare Qt x86 Builds
-        if: ${{ matrix.image == 'GLideN64 (x86 Project64-Qt)' }}
+        if: ${{ matrix.image == 'GLideN64 (x86 PJ64Legacy-Qt)' }}
         run: |
           curl -L -o %QT_BUILD_x86%.7z %QT_BUILD_BASE_URL%/%QT_BUILD_x86%.7z
           7z x -o%QTDIR_x86% %QT_BUILD_x86%.7z
         shell: cmd
       - name: Compile Translations
-        if: ${{ matrix.image == 'GLideN64 (x86 Project64-Qt)' }}
+        if: ${{ matrix.image == 'GLideN64 (x86 PJ64Legacy-Qt)' }}
         run: |
           set QTDIR=%QTDIR_x86%\%QT_BUILD_x86%
           for %%f in (translations\*.ts) do "%QTDIR%\bin\lrelease.exe" %%f
           move /y translations\*.qm translations\release\
         shell: cmd
-      - name: Build GLideN64 (x86 Project64-Qt)
-        if: ${{ matrix.image == 'GLideN64 (x86 Project64-Qt)' }}
+      - name: Build GLideN64 (x86 PJ64Legacy-Qt)
+        if: ${{ matrix.image == 'GLideN64 (x86 PJ64Legacy-Qt)' }}
         run: |
           set QTDIR=%QTDIR_x86%\%QT_BUILD_x86%
-          msbuild projects/msvc/GLideN64.sln /m /p:Configuration=Release_qt;Platform=Win32
+          msbuild projects/msvc/GLideN64.sln /m /p:Configuration=Release_qt_legacy;Platform=Win32
           copy ini\GLideN64.custom.ini %PJ64PluginsDirQT%
           copy translations\release\*.qm %PJ64PluginsDirQT%
         shell: cmd
-      - name: Upload GLideN64 (x86 Project64-Qt)
+      - name: Upload GLideN64 (x86 PJ64Legacy-Qt)
         uses: actions/upload-artifact@v4
-        if: ${{ matrix.image == 'GLideN64 (x86 Project64-Qt)' }}
+        if: ${{ matrix.image == 'GLideN64 (x86 PJ64Legacy-Qt)' }}
         with:
-          name: GLideN64-${{ env.GIT_REVISION }}-Windows-Project64-Qt-x86
+          name: GLideN64-${{ env.GIT_REVISION }}-Windows-PJ64Legacy-Qt-x86
           path: |
             build\windows-project64-qt\*.dll
             build\windows-project64-qt\GLideN64.custom.ini
