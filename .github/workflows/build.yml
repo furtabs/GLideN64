@@ -39,6 +39,13 @@ jobs:
           curl -L -o %QT_BUILD_x86%.7z %QT_BUILD_BASE_URL%/%QT_BUILD_x86%.7z
           7z x -o%QTDIR_x86% %QT_BUILD_x86%.7z
         shell: cmd
+      - name: Compile Translations
+        if: ${{ matrix.image == 'GLideN64 (x86 Project64-Qt)' }}
+        run: |
+          set QTDIR=%QTDIR_x86%\%QT_BUILD_x86%
+          for %%f in (translations\*.ts) do "%QTDIR%\bin\lrelease.exe" %%f
+          move /y translations\*.qm translations\release\
+        shell: cmd
       - name: Build GLideN64 (x86 Project64-Qt)
         if: ${{ matrix.image == 'GLideN64 (x86 Project64-Qt)' }}
         run: |
