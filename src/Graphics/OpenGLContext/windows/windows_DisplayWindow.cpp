@@ -236,11 +236,11 @@ bool DisplayWindowWindows::_resizeWindow()
 
 		return (SetWindowPos(hWnd, NULL, 0, 0, m_screenWidth, m_screenHeight, SWP_NOACTIVATE | SWP_NOZORDER | SWP_SHOWWINDOW) == TRUE);
 	} else {
-		m_screenWidth = m_width = config.video.windowedWidth;
-		m_screenHeight = config.video.windowedHeight;
-		_setBufferSize();
-
+		// Get actual client area size for proper scaling to window
 		GetClientRect( hWnd, &windowRect );
+		m_screenWidth = m_width = windowRect.right - windowRect.left;
+		m_screenHeight = windowRect.bottom - windowRect.top;
+		_setBufferSize();
 
 		if (hStatusBar)
 			GetWindowRect( hStatusBar, &statusRect );
