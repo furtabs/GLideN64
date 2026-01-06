@@ -84,15 +84,15 @@
       <LanguageStandard Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">stdcpp17</LanguageStandard>
     </ClCompile>
     <Lib>
-      <AdditionalDependencies>qtpcre2d.lib;qtmaind.lib;qwindowsd.lib;qicod.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;UxTheme.lib;qwindowsvistastyled.lib;Qt5WindowsUiAutomationSupportd.lib;Qt5FontDatabaseSupportd.lib;Qt5EventDispatcherSupportd.lib;Qt5FontDatabaseSupportd.lib;Qt5ThemeSupportd.lib;qtharfbuzzd.lib;Ws2_32.lib;Netapi32.lib;Userenv.lib;Ws2_32.lib;Wtsapi32.lib;Imm32.lib;WinMM.lib;Version.lib;Netapi32.lib;Dwmapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtpcre2.lib;qtmain.lib;qwindows.lib;qico.lib;Qt5Core.lib;Qt5Gui.lib;Qt5Widgets.lib;UxTheme.lib;qwindowsvistastyle.lib;Qt5WindowsUiAutomationSupport.lib;Qt5FontDatabaseSupport.lib;Qt5EventDispatcherSupport.lib;Qt5FontDatabaseSupport.lib;Qt5ThemeSupport.lib;qtharfbuzz.lib;Ws2_32.lib;Netapi32.lib;Userenv.lib;Ws2_32.lib;Wtsapi32.lib;Imm32.lib;WinMM.lib;Version.lib;Netapi32.lib;Dwmapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <Link>
-      <AdditionalDependencies>Qt5UiToolsd.lib;Qt5WinExtrasd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Qt5UiTools.lib;Qt5WinExtras.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">
     <ClCompile>
-      <PreprocessorDefinitions>QT_NO_DEBUG;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>QT_NO_DEBUG;NDEBUG;QT_STATICPLUGIN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DebugInformationFormat>None</DebugInformationFormat>
       <Optimization>MaxSpeed</Optimization>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
